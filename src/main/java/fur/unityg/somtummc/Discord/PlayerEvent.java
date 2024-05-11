@@ -77,11 +77,11 @@ public class PlayerEvent implements Listener {
     public void onPlayerChat(PlayerChatEvent event) {
         TextChannel channel = jda.getTextChannelById("1238726409942470749");
         Player player = event.getPlayer();
-        String message = event.getMessage();
+        String message = event.getMessage().toLowerCase();
         String[] blacklistwords = {"nigga", "nigger", "@everyone", "@here"};
         boolean blacklist = false;
         for (int i = 0; i <= blacklistwords.length - 1; i++){
-            if (message.equalsIgnoreCase(blacklistwords[i])){
+            if (message.contains(blacklistwords[i])){
                 blacklist = true;
             }
         }
