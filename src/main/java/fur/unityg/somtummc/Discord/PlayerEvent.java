@@ -30,7 +30,7 @@ public class PlayerEvent implements Listener {
     public void onPlayerJoin(PlayerJoinEvent event) {
         TextChannel channel = jda.getTextChannelById("1238726409942470749");
         EmbedBuilder embed = new EmbedBuilder();
-        embed.setAuthor(event.getPlayer().getName() + "joined the server!", "https://example.com", "https://mc-heads.net/avatar/" + event.getPlayer().getName());
+        embed.setAuthor(event.getPlayer().getName() + " joined the server!", "https://example.com", "https://mc-heads.net/avatar/" + event.getPlayer().getName());
         embed.setColor(new Color(64, 176, 56));
         if (channel != null) {
             channel.sendMessageEmbeds(embed.build()).queue();
@@ -43,7 +43,7 @@ public class PlayerEvent implements Listener {
         TextChannel channel = jda.getTextChannelById("1238726409942470749");
         EmbedBuilder embed = new EmbedBuilder();
         embed.setColor(new Color(252, 68, 35));
-        embed.setAuthor(event.getPlayer().getName() + "left the server!", "https://example.com", "https://mc-heads.net/avatar/" + event.getPlayer().getName());
+        embed.setAuthor(event.getPlayer().getName() + " left the server!", "https://example.com", "https://mc-heads.net/avatar/" + event.getPlayer().getName());
         if (channel != null) {
             channel.sendMessageEmbeds(embed.build()).queue();
         } else {
