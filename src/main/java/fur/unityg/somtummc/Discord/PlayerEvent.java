@@ -21,7 +21,6 @@ import java.util.regex.Pattern;
 
 public class PlayerEvent implements Listener {
     private JDA jda;
-    private static final Pattern RACIST_PATTERN = Pattern.compile("\\b(n[i!1]gg?([eo][rae@]|er)?|@?(everyone|here))\\b");
 
     public PlayerEvent(JDA jda) {
         this.jda = jda;
@@ -79,14 +78,18 @@ public class PlayerEvent implements Listener {
         TextChannel channel = jda.getTextChannelById("1238726409942470749");
         Player player = event.getPlayer();
         String message = event.getMessage();
-
-        Matcher matcher = RACIST_PATTERN.matcher(message.toLowerCase());
-        if (matcher.find()) {
+        String[] blacklistwords = {"nigga", "nigger", "@everyone", "@here"};
+        boolean blacklist = false;
+        for (int i = 0; i <= blacklistwords.length - 1; i++){
+            if (message.contains(blacklistwords[i])){
+                blacklist = true;
+            }
+        }
+        if (blacklist){
             event.setCancelled(true);
             player.sendMessage(ChatColor.LIGHT_PURPLE + "SomtumMC " + ChatColor.GRAY + "» " + ChatColor.RED + "You are not allowed to type this in the chat...");
             return;
         }
-
         if (channel != null) {
             channel.sendMessage(event.getPlayer().getName() + " » " + event.getMessage()).queue();
         } else {
