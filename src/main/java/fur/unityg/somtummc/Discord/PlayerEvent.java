@@ -81,7 +81,7 @@ public class PlayerEvent implements Listener {
         String[] blacklistwords = {"nigga", "nigger", "@everyone", "@here"};
         boolean blacklist = false;
         for (int i = 0; i <= blacklistwords.length - 1; i++){
-            if (message.contains(blacklistwords[i])){
+            if (message.equalsIgnoreCase(blacklistwords[i])){
                 blacklist = true;
             }
         }
