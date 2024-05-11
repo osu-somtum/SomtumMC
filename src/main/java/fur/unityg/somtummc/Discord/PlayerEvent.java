@@ -4,7 +4,6 @@ import io.papermc.paper.event.player.AsyncChatEvent;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
-import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -51,15 +50,14 @@ public class PlayerEvent implements Listener {
         }
     }
     @EventHandler
-    public void onPlayerAchievement(PlayerAdvancementDoneEvent event) {
-        TextComponent advancementName = (TextComponent) event.getAdvancement().displayName();
-        String plainTextAdvancementName = PlainTextComponentSerializer.plainText().serialize((net.kyori.adventure.text.Component) advancementName);
+    public void onPlayerAR(PlayerAdvancementDoneEvent event) {
         TextChannel channel = jda.getTextChannelById("1238726409942470749");
         EmbedBuilder embed = new EmbedBuilder();
         embed.setColor(new Color(64, 176, 56));
-        embed.setAuthor(event.getPlayer().getName() + " has made the advancement " + plainTextAdvancementName, "https://example.com", "https://mc-heads.net/avatar/" + event.getPlayer().getName());
+        embed.setAuthor(event.getPlayer().getName() + " has made the advancement " + event.getAdvancement().displayName(), "https://example.com", "https://mc-heads.net/avatar/" + event.getPlayer().getName());
         if (channel != null) {
             channel.sendMessageEmbeds(embed.build()).queue();
+            Bukkit.getServer().getLogger().info(event.getPlayer().getName() + " has made the advancement " + event.getAdvancement().displayName());
         } else {
             Bukkit.getServer().getLogger().warning("MOTHA FAKER IRT NO FOUND AHHAHASFHASUIBFAQojasfhjknaefwjkhaefwj g");
         }
