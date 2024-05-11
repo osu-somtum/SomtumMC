@@ -1,0 +1,8 @@
+name: SomtumMC
+version: '1.0-bread'
+main: fur.unityg.somtummc.SomtumMC
+api-version: '1.20'
+depend: [spark]
+authors: [UnityG]
+description: Discord Bot
+website: https://somtum.fun
