@@ -14,3 +14,12 @@ commands:
       - rules
       - imnotshutcre
     usage: /<command>
+  gamemode:
+    description: hai :3 its a gamemode cummand
+    aliases:
+      - gm
+      - gammode
+      - givemecreativenerd
+    usage: /<command> [survival | creative | adventure | spectator]
+    permission: somtum.gamemode
+

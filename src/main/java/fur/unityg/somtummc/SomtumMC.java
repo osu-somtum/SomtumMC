@@ -1,5 +1,6 @@
 package fur.unityg.somtummc;
 
+import fur.unityg.somtummc.Commands.Gamemode;
 import fur.unityg.somtummc.Commands.RulesCommand;
 import fur.unityg.somtummc.Discord.DiscCommand;
 import fur.unityg.somtummc.Discord.PlayerEvent;
@@ -82,6 +83,7 @@ public final class SomtumMC extends JavaPlugin implements Listener {
         // Registering Slash Command and Minecraft Events
 
         this.getCommand("rules").setExecutor(new RulesCommand());
+        this.getCommand("gamemode").setExecutor(new Gamemode());
 
         PlayerEvent joinMSG = new PlayerEvent(shardManager.getShards().get(0));
         getServer().getPluginManager().registerEvents(joinMSG, this);
