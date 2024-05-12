@@ -93,10 +93,11 @@ public class Gamemode implements CommandExecutor {
         player.sendMessage(ChatColor.LIGHT_PURPLE + "SomtumMC " + ChatColor.GRAY + " » " + ChatColor.GREEN + "You changed " + target.getName() + "'s gamemode to " + ChatColor.GOLD + ChatColor.BOLD + target.getGameMode());
         player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BANJO, 1f, 1f);
         return true;
-   }
+    }
+
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
+        List<String> completions = new ArrayList<>();
         if (args.length == 1) {
-            List<String> completions = new ArrayList<>();
             String input = args[0].toLowerCase();
             for (GameMode mode : GameMode.values()) {
                 String modeName = mode.name().toLowerCase();
@@ -104,8 +105,15 @@ public class Gamemode implements CommandExecutor {
                     completions.add(modeName);
                 }
             }
-            return completions;
+        } else if (args.length == 2) {
+            String input = args[1].toLowerCase();
+            for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
+                String playerName = onlinePlayer.getName();
+                if (playerName.toLowerCase().startsWith(input)) {
+                    completions.add(playerName);
+                }
+            }
         }
-        return null;
+        return completions;
     }
 }
