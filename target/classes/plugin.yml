@@ -3,6 +3,14 @@ version: '1.0-bread'
 main: fur.unityg.somtummc.SomtumMC
 api-version: '1.20'
 depend: [spark]
-authors: [UnityG]
-description: Discord Bot
+authors: [UnityG, Phapoom Saksri]
+description: SomtumMC's Utility and Discord Bot!
 website: https://somtum.fun
+commands:
+  rules:
+    description: Rules Command.
+    aliases:
+      - rule
+      - rules
+      - imnotshutcre
+    usage: /<command>
