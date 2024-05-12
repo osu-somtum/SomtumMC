@@ -15,9 +15,9 @@ public class RulesCommand implements CommandExecutor {
             player.sendMessage(ChatColor.GREEN + "hello this command works!");
             player.sendMessage(ChatColor.GREEN + "this is the 2nd line!");
             player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BANJO, 1f, 1f);
+        } else if (!(sender instanceof Player)) {
+            sender.sendMessage("Hello, You are not the father.");
         }
-
-        sender.sendMessage("Hello, You are not the father.");
         return true;
     }
 }

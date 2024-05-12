@@ -3,6 +3,7 @@ package fur.unityg.somtummc;
 import fur.unityg.somtummc.Commands.RulesCommand;
 import fur.unityg.somtummc.Discord.DiscCommand;
 import fur.unityg.somtummc.Discord.PlayerEvent;
+
 import me.lucko.spark.api.Spark;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.JDA;
@@ -19,6 +20,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.awt.*;
 
@@ -28,15 +30,10 @@ public final class SomtumMC extends JavaPlugin implements Listener {
     public ShardManager getShardManager() {
         return shardManager;
     }
-    private JDA jda;
 
-    public JDA getJDA() {
-        return jda;
-    }
 
     @Override
     public void onEnable() {
-
         getLogger().info("============================================");
         getLogger().info("Hello World! Somtum Bot is starting up....");
         getLogger().info("I'M ABOUT TO FC BLUEZENITH HD HR OMG OMG cOMg");
@@ -60,17 +57,27 @@ public final class SomtumMC extends JavaPlugin implements Listener {
         builder.enableCache(CacheFlag.ONLINE_STATUS);
         shardManager = builder.build();
 
-        // Starting Embed
+        // Embed
+        BukkitRunnable runnable = new BukkitRunnable() {
+            private JDA jda;
 
-        TextChannel channel = jda.getTextChannelById("1238726409942470749");
-        EmbedBuilder embed = new EmbedBuilder();
-        embed.setColor(new Color(64, 176, 56));
-        embed.setAuthor("The server started up succesfully!!");
-        if (channel != null) {
-            channel.sendMessageEmbeds(embed.build()).queue();
-        } else {
-            Bukkit.getServer().getLogger().warning("MOTHA FAKER IRT NO FOUND AHHAHASFHASUIBFAQojasfhjknaefwjkhaefwj g");
-        }
+            public JDA jda() {
+                return jda;
+            }
+            @Override
+            public void run() {
+                TextChannel channel = jda.getTextChannelById("1238726409942470749");
+                EmbedBuilder embed = new EmbedBuilder();
+                embed.setAuthor("The server has successfully started up!");
+                embed.setColor(new Color(64, 176, 56));
+                if (channel != null) {
+                    channel.sendMessageEmbeds(embed.build()).queue();
+                } else {
+                    Bukkit.getServer().getLogger().warning("MOTHA FAKER IRT NO FOUND AHHAHASFHASUIBFAQojasfhjknaefwjkhaefwj g");
+                }
+            }
+        };
+        runnable.runTaskLater(this, 1L);
 
         // Registering Slash Command and Minecraft Events
 
@@ -83,14 +90,25 @@ public final class SomtumMC extends JavaPlugin implements Listener {
 
     @Override
     public void onDisable() {
-        TextChannel channel = jda.getTextChannelById("1238726409942470749");
-        EmbedBuilder embed = new EmbedBuilder();
-        embed.setColor(new Color(128, 5, 5));
-        embed.setAuthor("The server shutdownned succesfully!!");
-        if (channel != null) {
-            channel.sendMessageEmbeds(embed.build()).queue();
-        } else {
-            Bukkit.getServer().getLogger().warning("MOTHA FAKER IRT NO FOUND AHHAHASFHASUIBFAQojasfhjknaefwjkhaefwj g");
-        }
+        BukkitRunnable runnable = new BukkitRunnable() {
+            private JDA jda;
+
+            public JDA jda() {
+                return jda;
+            }
+            @Override
+            public void run() {
+                TextChannel channel = jda.getTextChannelById("1238726409942470749");
+                EmbedBuilder embed = new EmbedBuilder();
+                embed.setAuthor("The server has successfully stop!");
+                embed.setColor(new Color(252, 68, 35));
+                if (channel != null) {
+                    channel.sendMessageEmbeds(embed.build()).queue();
+                } else {
+                    Bukkit.getServer().getLogger().warning("MOTHA FAKER IRT NO FOUND AHHAHASFHASUIBFAQojasfhjknaefwjkhaefwj g");
+                }
+            }
+        };
+        runnable.runTaskLater(this, 1L);
     }
 }
