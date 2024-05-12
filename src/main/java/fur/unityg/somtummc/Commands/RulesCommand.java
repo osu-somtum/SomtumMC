@@ -13,6 +13,7 @@ public class RulesCommand implements CommandExecutor {
         if (sender instanceof Player) {
             Player player = (Player) sender;
             player.sendMessage(ChatColor.GREEN + "hello this command works!");
+            player.sendMessage(ChatColor.GREEN + "this is the 2nd line!");
             player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BANJO, 1f, 1f);
         }
 
