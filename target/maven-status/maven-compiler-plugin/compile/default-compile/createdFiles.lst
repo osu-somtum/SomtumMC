@@ -1,3 +1,7 @@
 fur/unityg/somtummc/SomtumMC.class
-fur/unityg/somtummc/Discord/DiscCommand.class
+fur/unityg/somtummc/Commands/Who.class
 fur/unityg/somtummc/Discord/PlayerEvent.class
+fur/unityg/somtummc/Commands/RulesCommand.class
+fur/unityg/somtummc/Commands/Invsee.class
+fur/unityg/somtummc/Discord/DiscCommand.class
+fur/unityg/somtummc/Commands/Gamemode.class

@@ -30,18 +30,15 @@ public class DiscCommand extends ListenerAdapter {
             int maxonline = Bukkit.getServer().getMaxPlayers();
             // Get server cpu usage and tps
             DoubleStatistic<StatisticWindow.TicksPerSecond> tps = spark.tps();
-            DoubleStatistic<StatisticWindow.CpuUsage> cpuUsage = spark.cpuSystem();
 
             int tpsLast10Secs = (int) tps.poll(StatisticWindow.TicksPerSecond.SECONDS_10);
-            int usagelastMin = (int) cpuUsage.poll(StatisticWindow.CpuUsage.MINUTES_1);
 
             EmbedBuilder embed = new EmbedBuilder();
             embed.setTitle("Somtum Server Stats");
-            embed.setImage("https://unityg.notmycode.dev/channels4_profile.jpg");
+            embed.setThumbnail("https://unityg.notmycode.dev/channels4_profile.jpg");
             embed.setColor(new Color(64, 176, 56));
             embed.setDescription(":exploding_head: Online Players: **" + online + "**/**" + maxonline + "**\n" +
-                    ":zap: Server TPS: **" + tpsLast10Secs + "**\n" +
-                    ":computer: Server CPU Usage: **" + usagelastMin);
+                    ":zap: Server TPS: **" + tpsLast10Secs + "**\n");
             embed.setFooter("Among US Simulator 2024");
             event.replyEmbeds(embed.build()).queue();
         }

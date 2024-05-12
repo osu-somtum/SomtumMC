@@ -1,5 +1,6 @@
 package fur.unityg.somtummc;
 
+import fur.unityg.somtummc.Commands.RulesCommand;
 import fur.unityg.somtummc.Discord.DiscCommand;
 import fur.unityg.somtummc.Discord.PlayerEvent;
 import me.lucko.spark.api.Spark;
@@ -53,6 +54,8 @@ public final class SomtumMC extends JavaPlugin implements Listener {
         // Starting Embed
 
         // Registering Slash Command and Minecraft Events
+
+        this.getCommand("rules").setExecutor(new RulesCommand());
 
         PlayerEvent joinMSG = new PlayerEvent(shardManager.getShards().get(0));
         getServer().getPluginManager().registerEvents(joinMSG, this);
