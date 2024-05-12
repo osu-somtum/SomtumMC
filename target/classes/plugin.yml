@@ -22,4 +22,12 @@ commands:
       - givemecreativenerd
     usage: /<command> [survival | creative | adventure | spectator]
     permission: somtum.gamemode
+  who:
+    description: moyai
+    aliases:
+      - dox
+      - whois
+      - givemedox
+    usage: /<command> [player]
+    permission: somtum.who
 
