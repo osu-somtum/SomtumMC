@@ -29,14 +29,30 @@ public class PlayerEvent implements Listener {
     }
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
-        TextChannel channel = jda.getTextChannelById("1238726409942470749");
-        EmbedBuilder embed = new EmbedBuilder();
-        embed.setAuthor(event.getPlayer().getName() + " joined the server!", "https://example.com", "https://mc-heads.net/avatar/" + event.getPlayer().getName());
-        embed.setColor(new Color(64, 176, 56));
-        if (channel != null) {
-            channel.sendMessageEmbeds(embed.build()).queue();
-        } else {
-            Bukkit.getServer().getLogger().warning("MOTHA FAKER IRT NO FOUND AHHAHASFHASUIBFAQojasfhjknaefwjkhaefwj g");
+        if (event.getPlayer().hasPlayedBefore()) {
+            TextChannel channel = jda.getTextChannelById("1238726409942470749");
+            EmbedBuilder embed = new EmbedBuilder();
+            embed.setAuthor(event.getPlayer().getName() + " joined the server!", "https://example.com", "https://mc-heads.net/avatar/" + event.getPlayer().getName());
+            embed.setColor(new Color(64, 176, 56));
+            if (channel != null) {
+                channel.sendMessageEmbeds(embed.build()).queue();
+            } else {
+                Bukkit.getServer().getLogger().warning("MOTHA FAKER IRT NO FOUND AHHAHASFHASUIBFAQojasfhjknaefwjkhaefwj g");
+            }
+        }
+        else {
+            Player player = event.getPlayer();
+
+            player.sendMessage(ChatColor.LIGHT_PURPLE + "This is your first time playing!" + ChatColor.GREEN + " Please do /rules before playing! :3");
+            TextChannel channel = jda.getTextChannelById("1238726409942470749");
+            EmbedBuilder embed = new EmbedBuilder();
+            embed.setAuthor(event.getPlayer().getName() + " joined the server for the first time ever!", "https://example.com", "https://mc-heads.net/avatar/" + event.getPlayer().getName());
+            embed.setColor(new Color(64, 176, 56));
+            if (channel != null) {
+                channel.sendMessageEmbeds(embed.build()).queue();
+            } else {
+                Bukkit.getServer().getLogger().warning("MOTHA FAKER IRT NO FOUND AHHAHASFHASUIBFAQojasfhjknaefwjkhaefwj g");
+            }
         }
     }
     @EventHandler

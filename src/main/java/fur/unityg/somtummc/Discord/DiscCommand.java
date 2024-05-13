@@ -35,7 +35,6 @@ public class DiscCommand extends ListenerAdapter {
 
             EmbedBuilder embed = new EmbedBuilder();
             embed.setTitle("Somtum Server Stats");
-            embed.setThumbnail("https://unityg.notmycode.dev/channels4_profile.jpg");
             embed.setColor(new Color(64, 176, 56));
             embed.setDescription(":exploding_head: Online Players: **" + online + "**/**" + maxonline + "**\n" +
                     ":zap: Server TPS: **" + tpsLast10Secs + "**\n");
