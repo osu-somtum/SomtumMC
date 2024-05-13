@@ -74,7 +74,10 @@ public class PlayerEvent implements Listener {
         if (channel != null) {
             EmbedBuilder embed = new EmbedBuilder();
             embed.setColor(new Color(64, 176, 56)); // Thank 719505873877205082 for the fix
-            String advancement = event.getAdvancement().getDisplay() != null ? PlainTextComponentSerializer.plainText().serialize(event.getAdvancement().getDisplay().displayName()) : "223.207.43.70";
+            String advancement = event.getAdvancement().getDisplay() != null ? PlainTextComponentSerializer.plainText().serialize(event.getAdvancement().getDisplay().displayName()) : null;
+            if (advancement == null) {
+                return;
+            }
             embed.setAuthor(event.getPlayer().getName() + " has made the advancement " + advancement, "https://example.com", "https://mc-heads.net/avatar/" + event.getPlayer().getName());
             channel.sendMessageEmbeds(embed.build()).queue();
         } else {

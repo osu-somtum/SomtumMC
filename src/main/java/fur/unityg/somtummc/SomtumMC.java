@@ -57,7 +57,7 @@ public final class SomtumMC extends JavaPlugin implements Listener {
         loadHomes();
         getLogger().info("============================================");
         getLogger().info("Hello World! Somtum Bot is starting up....");
-        getLogger().info("I'M ABOUT TO FC BLUEZENITH HD HR OMG OMG cOMg");
+        getLogger().info("I'M ABOUT TO FC BLUEZENITH HD HR 727pp OMG OMG cOMg");
         getLogger().info("============================================");
 
         // Registering Spark...
