@@ -72,11 +72,16 @@ public class PlayerEvent implements Listener {
         TextChannel channel = jda.getTextChannelById("1238726409942470749");
 
         if (channel != null) {
-            EmbedBuilder embed = new EmbedBuilder();
-            embed.setColor(new Color(64, 176, 56)); // Thank 719505873877205082 for the fix
-            String advancement = event.getAdvancement().getDisplay() != null ? PlainTextComponentSerializer.plainText().serialize(event.getAdvancement().getDisplay().displayName()) : "223.207.43.70";
-            embed.setAuthor(event.getPlayer().getName() + " has made the advancement " + advancement, "https://example.com", "https://mc-heads.net/avatar/" + event.getPlayer().getName());
-            channel.sendMessageEmbeds(embed.build()).queue();
+            if (event.getAdvancement().getDisplay() != null) {
+                EmbedBuilder embed = new EmbedBuilder();
+                embed.setColor(new Color(64, 176, 56)); // Thank 719505873877205082 for the fix
+                String advancement = PlainTextComponentSerializer.plainText().serialize(event.getAdvancement().getDisplay().displayName());
+                embed.setAuthor(event.getPlayer().getName() + " has made the advancement " + advancement, "https://example.com", "https://mc-heads.net/avatar/" + event.getPlayer().getName());
+                channel.sendMessageEmbeds(embed.build()).queue();
+            }
+            else {
+                Bukkit.getServer().getLogger().warning("vtwi;t mew,,yo57'[y8d^w,jg-hk/0g]p");
+            }
         } else {
             Bukkit.getServer().getLogger().warning("Discord channel not found with ID: 1238726409942470749");
         }
