@@ -4,6 +4,7 @@ import io.papermc.paper.event.player.AsyncChatEvent;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
+import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
@@ -56,8 +57,9 @@ public class PlayerEvent implements Listener {
 
         if (channel != null) {
             EmbedBuilder embed = new EmbedBuilder();
-            embed.setColor(new Color(64, 176, 56)); //displayNameComponent.getArguments().get(0).getContent()
-            embed.setAuthor(event.getPlayer().getName() + " has made the advancement " + event.getAdvancement().displayName(), "https://example.com", "https://mc-heads.net/avatar/" + event.getPlayer().getName());
+            embed.setColor(new Color(64, 176, 56)); // Thank 719505873877205082 for the fix
+            String advancement = PlainTextComponentSerializer.plainText().serialize(event.getAdvancement().getDisplay().displayName());
+            embed.setAuthor(event.getPlayer().getName() + " has made the advancement " + advancement, "https://example.com", "https://mc-heads.net/avatar/" + event.getPlayer().getName());
 
             channel.sendMessageEmbeds(embed.build()).queue(message ->
                             Bukkit.getServer().getLogger().info(event.getPlayer().getName() + " has made the advancement " + event.getAdvancement().displayName()),
