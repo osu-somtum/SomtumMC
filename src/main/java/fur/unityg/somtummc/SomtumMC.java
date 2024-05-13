@@ -99,6 +99,7 @@ public final class SomtumMC extends JavaPlugin implements Listener {
 
         this.getCommand("rules").setExecutor(new RulesCommand());
         this.getCommand("gamemode").setExecutor(new Gamemode());
+        this.getCommand("gamemode").setTabCompleter(new Gamemode());
         this.getCommand("sethome").setExecutor(new Sethome(this));
         this.getCommand("home").setExecutor(new Sethome(this));
         this.getCommand("delhome").setExecutor(new Sethome(this));
