@@ -53,14 +53,17 @@ public class PlayerEvent implements Listener {
     @EventHandler
     public void onPlayerAR(PlayerAdvancementDoneEvent event) {
         TextChannel channel = jda.getTextChannelById("1238726409942470749");
-        EmbedBuilder embed = new EmbedBuilder();
-        embed.setColor(new Color(64, 176, 56));
-        embed.setAuthor(event.getPlayer().getName() + " has made the advancement " + event.getAdvancement().displayName(), "https://example.com", "https://mc-heads.net/avatar/" + event.getPlayer().getName());
+
         if (channel != null) {
-            channel.sendMessageEmbeds(embed.build()).queue();
-            Bukkit.getServer().getLogger().info(event.getPlayer().getName() + " has made the advancement " + event.getAdvancement().displayName());
+            EmbedBuilder embed = new EmbedBuilder();
+            embed.setColor(new Color(64, 176, 56)); //displayNameComponent.getArguments().get(0).getContent()
+            embed.setAuthor(event.getPlayer().getName() + " has made the advancement " + event.getAdvancement().displayName(), "https://example.com", "https://mc-heads.net/avatar/" + event.getPlayer().getName());
+
+            channel.sendMessageEmbeds(embed.build()).queue(message ->
+                            Bukkit.getServer().getLogger().info(event.getPlayer().getName() + " has made the advancement " + event.getAdvancement().displayName()),
+                    throwable -> Bukkit.getServer().getLogger().warning("Failed to send message to Discord channel: " + throwable.getMessage()));
         } else {
-            Bukkit.getServer().getLogger().warning("MOTHA FAKER IRT NO FOUND AHHAHASFHASUIBFAQojasfhjknaefwjkhaefwj g");
+            Bukkit.getServer().getLogger().warning("Discord channel not found with ID: 1238726409942470749");
         }
     }
     @EventHandler
@@ -80,7 +83,7 @@ public class PlayerEvent implements Listener {
         TextChannel channel = jda.getTextChannelById("1238726409942470749");
         Player player = event.getPlayer();
         String message = event.getMessage().toLowerCase();
-        String[] blacklistwords = {"nigga", "nigger", "@everyone", "@here"};
+        String[] blacklistwords = {"nigga", "nigger", "@everyone", "@here", "faggot", "fag", "shutcreisthebest"};
         boolean blacklist = false;
         for (int i = 0; i <= blacklistwords.length - 1; i++){
             if (message.contains(blacklistwords[i])){

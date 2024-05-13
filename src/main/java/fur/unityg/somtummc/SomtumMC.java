@@ -80,25 +80,20 @@ public final class SomtumMC extends JavaPlugin implements Listener {
 
         // Embed
         BukkitRunnable runnable = new BukkitRunnable() {
-            private JDA jda;
-
-            public JDA jda() {
-                return jda;
-            }
             @Override
             public void run() {
-                TextChannel channel = jda.getTextChannelById("1238726409942470749");
+                TextChannel channel = shardManager.getGuildById("1216113715628347564").getTextChannelById("1238726409942470749");
                 EmbedBuilder embed = new EmbedBuilder();
                 embed.setAuthor("The server has successfully started up!");
                 embed.setColor(new Color(64, 176, 56));
                 if (channel != null) {
                     channel.sendMessageEmbeds(embed.build()).queue();
                 } else {
-                    Bukkit.getServer().getLogger().warning("MOTHA FAKER IRT NO FOUND AHHAHASFHASUIBFAQojasfhjknaefwjkhaefwj g");
+                    Bukkit.getServer().getLogger().warning("channel no found :()(((D_I_AC_CVVVVVVVVVVVVV");
                 }
             }
         };
-        runnable.runTaskLater(this, 1L);
+        runnable.runTaskLater(this, 15L);
 
         // Registering Slash Command and Minecraft Events
 
@@ -117,29 +112,24 @@ public final class SomtumMC extends JavaPlugin implements Listener {
     public void onDisable() {
         saveHomes();
         BukkitRunnable runnable = new BukkitRunnable() {
-            private JDA jda;
-
-            public JDA jda() {
-                return jda;
-            }
             @Override
             public void run() {
-                TextChannel channel = jda.getTextChannelById("1238726409942470749");
+                TextChannel channel = shardManager.getGuildById("1216113715628347564").getTextChannelById("1238726409942470749");
                 EmbedBuilder embed = new EmbedBuilder();
-                embed.setAuthor("The server has successfully stop!");
+                embed.setAuthor("The server has successfully stopped!");
                 embed.setColor(new Color(252, 68, 35));
                 if (channel != null) {
                     channel.sendMessageEmbeds(embed.build()).queue();
                 } else {
-                    Bukkit.getServer().getLogger().warning("MOTHA FAKER IRT NO FOUND AHHAHASFHASUIBFAQojasfhjknaefwjkhaefwj g");
+                    Bukkit.getServer().getLogger().warning("i cannot find chanel hepl!");
                 }
             }
         };
-        runnable.runTaskLater(this, 1L);
+        runnable.runTaskLater(this, 15L);
     }
     public void setHome(Player player) {
         homes.put(player.getUniqueId().toString(), player.getLocation());
-        player.sendMessage(ChatColor.LIGHT_PURPLE + "SomtumMC " + ChatColor.GRAY + " » " + ChatColor.GOLD + "You have successfully set your home!");
+        player.sendMessage(ChatColor.LIGHT_PURPLE + "SomtumMC" + ChatColor.GRAY + " » " + ChatColor.GOLD + "You have successfully set your home!");
         saveHomes(); // save home when it set bnecause i no lose atafadat
     }
 

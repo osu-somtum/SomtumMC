@@ -30,18 +30,18 @@ public class Sethome implements CommandExecutor {
         if (command.getName().equalsIgnoreCase("home")) {
             if (plugin.getHomes().containsKey(player.getUniqueId().toString())) {
                 player.teleport(plugin.getHomes().get(player.getUniqueId().toString()));
-                player.sendMessage(ChatColor.LIGHT_PURPLE + "SomtumMC " + ChatColor.GRAY + " » " + ChatColor.GOLD + "You have teleported to your house :)");
+                player.sendMessage(ChatColor.LIGHT_PURPLE + "SomtumMC" + ChatColor.GRAY + " » " + ChatColor.GOLD + "You have teleported to your house :)");
             } else {
-                player.sendMessage(ChatColor.LIGHT_PURPLE + "SomtumMC " + ChatColor.GRAY + " » " + ChatColor.RED + "You don't have any home set. Do /sethome to set a home.");
+                player.sendMessage(ChatColor.LIGHT_PURPLE + "SomtumMC" + ChatColor.GRAY + " » " + ChatColor.RED + "You don't have any home set. Do /sethome to set a home.");
             }
             return true;
         }
         if (command.getName().equalsIgnoreCase("delhome")) {
             if (plugin.getHomes().containsKey(player.getUniqueId().toString())) {
                 plugin.getHomes().remove(player.getUniqueId().toString());
-                player.sendMessage(ChatColor.LIGHT_PURPLE + "SomtumMC " + ChatColor.GRAY + " » " + ChatColor.RED + "You deleted your only home.");
+                player.sendMessage(ChatColor.LIGHT_PURPLE + "SomtumMC" + ChatColor.GRAY + " » " + ChatColor.RED + "You deleted your only home.");
             } else {
-                player.sendMessage(ChatColor.LIGHT_PURPLE + "SomtumMC " + ChatColor.GRAY + " » " + ChatColor.RED + "You don't have a home set.");
+                player.sendMessage(ChatColor.LIGHT_PURPLE + "SomtumMC" + ChatColor.GRAY + " » " + ChatColor.RED + "You don't have a home set.");
             }
             return true;
         }
