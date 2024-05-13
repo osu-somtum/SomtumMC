@@ -61,9 +61,7 @@ public class PlayerEvent implements Listener {
             String advancement = PlainTextComponentSerializer.plainText().serialize(event.getAdvancement().getDisplay().displayName());
             embed.setAuthor(event.getPlayer().getName() + " has made the advancement " + advancement, "https://example.com", "https://mc-heads.net/avatar/" + event.getPlayer().getName());
 
-            channel.sendMessageEmbeds(embed.build()).queue(message ->
-                            Bukkit.getServer().getLogger().info(event.getPlayer().getName() + " has made the advancement " + event.getAdvancement().displayName()),
-                    throwable -> Bukkit.getServer().getLogger().warning("Failed to send message to Discord channel: " + throwable.getMessage()));
+            channel.sendMessageEmbeds(embed.build()).queue();
         } else {
             Bukkit.getServer().getLogger().warning("Discord channel not found with ID: 1238726409942470749");
         }
