@@ -8,11 +8,14 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.util.StringUtil;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Gamemode implements CommandExecutor {
+    private static final String[] listofmodes = { "survival", "creative", "adventure", "spectator" };
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player)) {
@@ -97,13 +100,23 @@ public class Gamemode implements CommandExecutor {
 
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
         List<String> completions = new ArrayList<>();
+        List<String> commands = new ArrayList<>();
+        // if player has op, add all commands
+        // else if player is normal player, only survival and spectator
         if (args.length == 1) {
             String input = args[0].toLowerCase();
+            if (sender.hasPermission("somtum.gamemode")) {
+                Collections.addAll(commands, listofmodes);
+            } else {
+                commands.add("survival");
+                commands.add("spectator");
+            }
             for (GameMode mode : GameMode.values()) {
                 String modeName = mode.name().toLowerCase();
                 if (modeName.startsWith(input)) {
                     completions.add(modeName);
                 }
+                StringUtil.copyPartialMatches(args[0], commands, completions);
             }
         } else if (args.length == 2) {
             String input = args[1].toLowerCase();
@@ -114,6 +127,7 @@ public class Gamemode implements CommandExecutor {
                 }
             }
         }
+        Collections.sort(completions);
         return completions;
     }
 }
