@@ -22,12 +22,24 @@ commands:
       - givemecreativenerd
     usage: /<command> [survival | creative | adventure | spectator]
     permission: somtum.gamemode
-  who:
-    description: moyai
+  sethome:
+    description: sethome command
     aliases:
-      - dox
-      - whois
-      - givemedox
-    usage: /<command> [player]
-    permission: somtum.who
-
+      - sethouse
+      - seth
+      - savehome
+    usage: /<command>
+  home:
+    description: home command
+    aliases:
+      - house
+      - hom
+      - mybed
+    usage: /<command>
+  delhome:
+    description: delhome command
+    aliases:
+      - deletehome
+      - deletehouse
+      - byebyehome
+    usage: /<command>

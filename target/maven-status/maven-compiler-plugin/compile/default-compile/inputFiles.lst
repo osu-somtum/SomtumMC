@@ -1,7 +1,10 @@
-/home/furry/Desktop/SomtumMCGit/src/main/java/fur/unityg/somtummc/Discord/DiscCommand.java
-/home/furry/Desktop/SomtumMCGit/src/main/java/fur/unityg/somtummc/Commands/RulesCommand.java
-/home/furry/Desktop/SomtumMCGit/src/main/java/fur/unityg/somtummc/Commands/Gamemode.java
-/home/furry/Desktop/SomtumMCGit/src/main/java/fur/unityg/somtummc/Commands/Who.java
-/home/furry/Desktop/SomtumMCGit/src/main/java/fur/unityg/somtummc/Discord/PlayerEvent.java
-/home/furry/Desktop/SomtumMCGit/src/main/java/fur/unityg/somtummc/Commands/Invsee.java
-/home/furry/Desktop/SomtumMCGit/src/main/java/fur/unityg/somtummc/SomtumMC.java
+C:\Users\furrygang\Documents\GitHub\SomtumMC\src\main\java\fur\unityg\somtummc\Commands\RulesCommand.java
+C:\Users\furrygang\Documents\GitHub\SomtumMC\src\main\java\fur\unityg\somtummc\Commands\TeleportAccept.java
+C:\Users\furrygang\Documents\GitHub\SomtumMC\src\main\java\fur\unityg\somtummc\Discord\DiscCommand.java
+C:\Users\furrygang\Documents\GitHub\SomtumMC\src\main\java\fur\unityg\somtummc\SomtumMC.java
+C:\Users\furrygang\Documents\GitHub\SomtumMC\src\main\java\fur\unityg\somtummc\Commands\Teleport.java
+C:\Users\furrygang\Documents\GitHub\SomtumMC\src\main\java\fur\unityg\somtummc\Utils\LocationUtils.java
+C:\Users\furrygang\Documents\GitHub\SomtumMC\src\main\java\fur\unityg\somtummc\Commands\TeleportRequest.java
+C:\Users\furrygang\Documents\GitHub\SomtumMC\src\main\java\fur\unityg\somtummc\Discord\PlayerEvent.java
+C:\Users\furrygang\Documents\GitHub\SomtumMC\src\main\java\fur\unityg\somtummc\Commands\Gamemode.java
+C:\Users\furrygang\Documents\GitHub\SomtumMC\src\main\java\fur\unityg\somtummc\Commands\Sethome.java
