@@ -80,7 +80,7 @@ public class PlayerEvent implements Listener {
                 channel.sendMessageEmbeds(embed.build()).queue();
             }
             else {
-                Bukkit.getServer().getLogger().warning("vtwi;t mew,,yo57'[y8d^w,jg-hk/0g]p");
+                Bukkit.getServer().getLogger().warning("advancement is null - not sending an bedem");
             }
         } else {
             Bukkit.getServer().getLogger().warning("Discord channel not found with ID: 1238726409942470749");
