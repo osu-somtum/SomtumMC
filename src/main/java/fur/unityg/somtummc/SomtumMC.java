@@ -4,6 +4,7 @@ import fur.unityg.somtummc.Commands.Gamemode;
 import fur.unityg.somtummc.Commands.RulesCommand;
 import fur.unityg.somtummc.Commands.Sethome;
 import fur.unityg.somtummc.Discord.DiscCommand;
+import fur.unityg.somtummc.Discord.DiscordToMinecraftChat;
 import fur.unityg.somtummc.Discord.PlayerEvent;
 import fur.unityg.somtummc.Utils.LocationUtils;
 
@@ -72,7 +73,7 @@ public final class SomtumMC extends JavaPlugin implements Listener {
         DefaultShardManagerBuilder builder = DefaultShardManagerBuilder.createDefault(token);
         builder.setStatus(OnlineStatus.IDLE);
         builder.setActivity(Activity.playing("Among US"));
-        builder.enableIntents(GatewayIntent.GUILD_MESSAGES, GatewayIntent.GUILD_MEMBERS, GatewayIntent.GUILD_MESSAGE_TYPING, GatewayIntent.GUILD_PRESENCES);
+        builder.enableIntents(GatewayIntent.GUILD_MESSAGES, GatewayIntent.GUILD_MEMBERS, GatewayIntent.GUILD_MESSAGE_TYPING, GatewayIntent.GUILD_PRESENCES, GatewayIntent.MESSAGE_CONTENT);
         builder.setMemberCachePolicy(MemberCachePolicy.ALL);
         builder.setChunkingFilter(ChunkingFilter.ALL);
         builder.enableCache(CacheFlag.ONLINE_STATUS);
@@ -107,6 +108,8 @@ public final class SomtumMC extends JavaPlugin implements Listener {
         PlayerEvent joinMSG = new PlayerEvent(shardManager.getShards().get(0));
         getServer().getPluginManager().registerEvents(joinMSG, this);
         shardManager.addEventListener(new DiscCommand());
+        shardManager.addEventListener(new DiscordToMinecraftChat(shardManager.getShards().get(0)));
+        getServer().getPluginManager().registerEvents(new DiscordToMinecraftChat(shardManager.getShards().get(0)), this);
     }
 
     @Override
