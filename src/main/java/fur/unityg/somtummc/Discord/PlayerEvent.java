@@ -1,10 +1,12 @@
 package fur.unityg.somtummc.Discord;
 
-import io.papermc.paper.event.player.AsyncChatEvent;
+import fur.unityg.somtummc.SomtumMC;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
+import net.luckperms.api.LuckPerms;
+import net.luckperms.api.cacheddata.CachedMetaData;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
@@ -23,16 +25,23 @@ import java.util.regex.Pattern;
 
 public class PlayerEvent implements Listener {
     private JDA jda;
+    private final SomtumMC plugin;
+    private final LuckPerms luckPerms;
 
-    public PlayerEvent(JDA jda) {
+    public PlayerEvent(JDA jda, SomtumMC plugin, LuckPerms luckPerms) {
         this.jda = jda;
+        this.plugin = plugin;
+        this.luckPerms = luckPerms;
     }
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         if (event.getPlayer().hasPlayedBefore()) {
+            CachedMetaData metaData = this.luckPerms.getPlayerAdapter(Player.class).getMetaData(event.getPlayer());
+            String prefixWC = metaData.getPrefix();
+            String prefix = removeColorCodes(prefixWC);
             TextChannel channel = jda.getTextChannelById("1238726409942470749");
             EmbedBuilder embed = new EmbedBuilder();
-            embed.setAuthor(event.getPlayer().getName() + " joined the server!", "https://example.com", "https://mc-heads.net/avatar/" + event.getPlayer().getName());
+            embed.setAuthor(prefix + event.getPlayer().getName() + " joined the server!", "https://example.com", "https://mc-heads.net/avatar/" + event.getPlayer().getName());
             embed.setColor(new Color(64, 176, 56));
             if (channel != null) {
                 channel.sendMessageEmbeds(embed.build()).queue();
@@ -57,10 +66,13 @@ public class PlayerEvent implements Listener {
     }
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
+        CachedMetaData metaData = this.luckPerms.getPlayerAdapter(Player.class).getMetaData(event.getPlayer());
+        String prefixWC = metaData.getPrefix();
+        String prefix = removeColorCodes(prefixWC);
         TextChannel channel = jda.getTextChannelById("1238726409942470749");
         EmbedBuilder embed = new EmbedBuilder();
         embed.setColor(new Color(252, 68, 35));
-        embed.setAuthor(event.getPlayer().getName() + " left the server!", "https://example.com", "https://mc-heads.net/avatar/" + event.getPlayer().getName());
+        embed.setAuthor(prefix + event.getPlayer().getName() + " left the server!", "https://example.com", "https://mc-heads.net/avatar/" + event.getPlayer().getName());
         if (channel != null) {
             channel.sendMessageEmbeds(embed.build()).queue();
         } else {
@@ -117,9 +129,17 @@ public class PlayerEvent implements Listener {
             return;
         }
         if (channel != null) {
-            channel.sendMessage(event.getPlayer().getName() + " » " + event.getMessage()).queue();
+            CachedMetaData metaData = this.luckPerms.getPlayerAdapter(Player.class).getMetaData(player);
+            String prefixWC = metaData.getPrefix();
+            String prefix = removeColorCodes(prefixWC);
+            channel.sendMessage("**" + prefix + "**" + event.getPlayer().getName() + " » " + event.getMessage()).queue();
         } else {
             Bukkit.getServer().getLogger().warning("MOTHA FAKER IRT NO FOUND AHHAHASFHASUIBFAQojasfhjknaefwjkhaefwj g");
         }
+    }
+    private String removeColorCodes(String input) {
+        Pattern pattern = Pattern.compile("&[0-9a-fklmnor]");
+        Matcher matcher = pattern.matcher(input);
+        return matcher.replaceAll("");
     }
 }

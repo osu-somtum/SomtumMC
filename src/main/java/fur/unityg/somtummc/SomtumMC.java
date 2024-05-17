@@ -10,16 +10,19 @@ import fur.unityg.somtummc.Utils.LocationUtils;
 
 import me.lucko.spark.api.Spark;
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
+import net.dv8tion.jda.api.events.session.ReadyEvent;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.sharding.DefaultShardManagerBuilder;
 import net.dv8tion.jda.api.sharding.ShardManager;
 import net.dv8tion.jda.api.utils.ChunkingFilter;
 import net.dv8tion.jda.api.utils.MemberCachePolicy;
 import net.dv8tion.jda.api.utils.cache.CacheFlag;
+import net.dv8tion.jda.api.hooks.ListenerAdapter;
+
+import net.luckperms.api.LuckPerms;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -30,7 +33,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitRunnable;
 
 import java.awt.*;
 import java.io.File;
@@ -50,6 +52,7 @@ public final class SomtumMC extends JavaPlugin implements Listener {
     public Map<String, Location> getHomes() {
         return homes;
     }
+    private LuckPerms luckPerms;
 
     @Override
     public void onEnable() {
@@ -61,12 +64,13 @@ public final class SomtumMC extends JavaPlugin implements Listener {
         getLogger().info("I'M ABOUT TO FC BLUEZENITH HD HR 727pp OMG OMG cOMg");
         getLogger().info("============================================");
 
-        // Registering Spark...
+        // Registering Spark... and LUCKY PERMISSION
 
         RegisteredServiceProvider<Spark> provider = Bukkit.getServicesManager().getRegistration(Spark.class);
         if (provider != null) {
             Spark spark = provider.getProvider();
         }
+        this.luckPerms = getServer().getServicesManager().load(LuckPerms.class);
 
         // Registering Discord Bot
 
@@ -80,21 +84,21 @@ public final class SomtumMC extends JavaPlugin implements Listener {
         shardManager = builder.build();
 
         // Embed
-        BukkitRunnable runnable = new BukkitRunnable() {
+        shardManager.addEventListener(new ListenerAdapter() {
             @Override
-            public void run() {
-                TextChannel channel = shardManager.getGuildById("1216113715628347564").getTextChannelById("1238726409942470749");
-                EmbedBuilder embed = new EmbedBuilder();
-                embed.setAuthor("The server has successfully started up!");
-                embed.setColor(new Color(64, 176, 56));
+            public void onReady(ReadyEvent event) {
+                // JDA has finished loading
+                TextChannel channel = shardManager.getTextChannelById("1238726409942470749");
                 if (channel != null) {
+                    EmbedBuilder embed = new EmbedBuilder();
+                    embed.setAuthor("The server has successfully started up!");
+                    embed.setColor(new Color(64, 176, 56));
                     channel.sendMessageEmbeds(embed.build()).queue();
                 } else {
-                    Bukkit.getServer().getLogger().warning("channel no found :()(((D_I_AC_CVVVVVVVVVVVVV");
+                    Bukkit.getServer().getLogger().warning("Relay channel not found.");
                 }
             }
-        };
-        runnable.runTaskLater(this, 15L);
+        });
 
         // Registering Slash Command and Minecraft Events
 
@@ -105,7 +109,7 @@ public final class SomtumMC extends JavaPlugin implements Listener {
         this.getCommand("home").setExecutor(new Sethome(this));
         this.getCommand("delhome").setExecutor(new Sethome(this));
 
-        PlayerEvent joinMSG = new PlayerEvent(shardManager.getShards().get(0));
+        PlayerEvent joinMSG = new PlayerEvent(shardManager.getShards().get(0), this, luckPerms);
         getServer().getPluginManager().registerEvents(joinMSG, this);
         shardManager.addEventListener(new DiscCommand());
         shardManager.addEventListener(new DiscordToMinecraftChat(shardManager.getShards().get(0)));
@@ -115,21 +119,15 @@ public final class SomtumMC extends JavaPlugin implements Listener {
     @Override
     public void onDisable() {
         saveHomes();
-        BukkitRunnable runnable = new BukkitRunnable() {
-            @Override
-            public void run() {
-                TextChannel channel = shardManager.getGuildById("1216113715628347564").getTextChannelById("1238726409942470749");
-                EmbedBuilder embed = new EmbedBuilder();
-                embed.setAuthor("The server has successfully stopped!");
-                embed.setColor(new Color(252, 68, 35));
-                if (channel != null) {
-                    channel.sendMessageEmbeds(embed.build()).queue();
-                } else {
-                    Bukkit.getServer().getLogger().warning("i cannot find chanel hepl!");
-                }
-            }
-        };
-        runnable.runTaskLater(this, 15L);
+        TextChannel channel = shardManager.getTextChannelById("1238726409942470749");
+        if (channel != null) {
+            EmbedBuilder embed = new EmbedBuilder();
+            embed.setAuthor("The server has successfully stopped!");
+            embed.setColor(new Color(100, 5, 18));
+            channel.sendMessageEmbeds(embed.build()).queue();
+        } else {
+            Bukkit.getServer().getLogger().warning("Relay channel not found.");
+        }
     }
     public void setHome(Player player) {
         homes.put(player.getUniqueId().toString(), player.getLocation());
