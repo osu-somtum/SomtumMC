@@ -8,7 +8,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.event.Listener;
 
 public class DiscordToMinecraftChat extends ListenerAdapter implements Listener {
-    private final String discordChannelId = "1238726409942470749"; // Use final for channel ID
+    private final String discordChannelId = "1238520224647745568"; // Use final for channel ID
     private JDA jda;
 
     public DiscordToMinecraftChat(JDA jda) {

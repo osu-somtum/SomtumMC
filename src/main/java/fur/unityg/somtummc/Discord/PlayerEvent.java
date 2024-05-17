@@ -39,7 +39,7 @@ public class PlayerEvent implements Listener {
             CachedMetaData metaData = this.luckPerms.getPlayerAdapter(Player.class).getMetaData(event.getPlayer());
             String prefixWC = metaData.getPrefix();
             String prefix = removeColorCodes(prefixWC);
-            TextChannel channel = jda.getTextChannelById("1238726409942470749");
+            TextChannel channel = jda.getTextChannelById("1238520224647745568");
             EmbedBuilder embed = new EmbedBuilder();
             embed.setAuthor(prefix + event.getPlayer().getName() + " joined the server!", "https://example.com", "https://mc-heads.net/avatar/" + event.getPlayer().getName());
             embed.setColor(new Color(64, 176, 56));
@@ -53,7 +53,7 @@ public class PlayerEvent implements Listener {
             Player player = event.getPlayer();
 
             player.sendMessage(ChatColor.LIGHT_PURPLE + "This is your first time playing!" + ChatColor.GREEN + " Please do /rules before playing! :3");
-            TextChannel channel = jda.getTextChannelById("1238726409942470749");
+            TextChannel channel = jda.getTextChannelById("1238520224647745568");
             EmbedBuilder embed = new EmbedBuilder();
             embed.setAuthor(event.getPlayer().getName() + " joined the server for the first time ever!", "https://example.com", "https://mc-heads.net/avatar/" + event.getPlayer().getName());
             embed.setColor(new Color(64, 176, 56));
@@ -69,7 +69,7 @@ public class PlayerEvent implements Listener {
         CachedMetaData metaData = this.luckPerms.getPlayerAdapter(Player.class).getMetaData(event.getPlayer());
         String prefixWC = metaData.getPrefix();
         String prefix = removeColorCodes(prefixWC);
-        TextChannel channel = jda.getTextChannelById("1238726409942470749");
+        TextChannel channel = jda.getTextChannelById("1238520224647745568");
         EmbedBuilder embed = new EmbedBuilder();
         embed.setColor(new Color(252, 68, 35));
         embed.setAuthor(prefix + event.getPlayer().getName() + " left the server!", "https://example.com", "https://mc-heads.net/avatar/" + event.getPlayer().getName());
@@ -81,7 +81,7 @@ public class PlayerEvent implements Listener {
     }
     @EventHandler
     public void onPlayerAR(PlayerAdvancementDoneEvent event) {
-        TextChannel channel = jda.getTextChannelById("1238726409942470749");
+        TextChannel channel = jda.getTextChannelById("1238520224647745568");
 
         if (channel != null) {
             if (event.getAdvancement().getDisplay() != null) {
@@ -100,7 +100,7 @@ public class PlayerEvent implements Listener {
     }
     @EventHandler
     public void onPlayerDied(PlayerDeathEvent event) {
-        TextChannel channel = jda.getTextChannelById("1238726409942470749");
+        TextChannel channel = jda.getTextChannelById("1238520224647745568");
         EmbedBuilder embed = new EmbedBuilder();
         embed.setColor(new Color(252, 68, 35));
         embed.setAuthor(event.getDeathMessage(), "https://example.com", "https://mc-heads.net/avatar/" + event.getPlayer().getName());
@@ -112,7 +112,7 @@ public class PlayerEvent implements Listener {
     }
     @EventHandler
     public void onPlayerChat(PlayerChatEvent event) {
-        TextChannel channel = jda.getTextChannelById("1238726409942470749");
+        TextChannel channel = jda.getTextChannelById("1238520224647745568");
         Player player = event.getPlayer();
         String message = event.getMessage().toLowerCase();
         String[] blacklistwords = {"nigga", "nigger", "@everyone", "@here", "faggot", "fag", "shutcreisthebest"};

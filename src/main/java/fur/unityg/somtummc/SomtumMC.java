@@ -88,7 +88,7 @@ public final class SomtumMC extends JavaPlugin implements Listener {
             @Override
             public void onReady(ReadyEvent event) {
                 // JDA has finished loading
-                TextChannel channel = shardManager.getTextChannelById("1238726409942470749");
+                TextChannel channel = shardManager.getTextChannelById("1238520224647745568");
                 if (channel != null) {
                     EmbedBuilder embed = new EmbedBuilder();
                     embed.setAuthor("The server has successfully started up!");
@@ -119,7 +119,7 @@ public final class SomtumMC extends JavaPlugin implements Listener {
     @Override
     public void onDisable() {
         saveHomes();
-        TextChannel channel = shardManager.getTextChannelById("1238726409942470749");
+        TextChannel channel = shardManager.getTextChannelById("1238520224647745568");
         if (channel != null) {
             EmbedBuilder embed = new EmbedBuilder();
             embed.setAuthor("The server has successfully stopped!");
