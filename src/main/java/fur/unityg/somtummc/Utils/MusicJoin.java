@@ -21,8 +21,9 @@ public class MusicJoin {
         if (musicEnabled) {
             String randomSongFile = getRandomSongFile();
             Song song = NBSDecoder.parse(new File(plugin.getDataFolder() + File.separator + "songs", randomSongFile));
+            RadioSongPlayer rsp = new RadioSongPlayer(song);
+            rsp.setPlaying(false);
             if (song != null) {
-                RadioSongPlayer rsp = new RadioSongPlayer(song);
                 rsp.addPlayer(player);
                 rsp.setPlaying(true);
                 player.sendMessage("§aNow playing: §e" + song.getTitle());
