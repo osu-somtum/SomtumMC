@@ -1,6 +1,7 @@
 package fur.unityg.somtummc.Discord;
 
 import fur.unityg.somtummc.SomtumMC;
+import fur.unityg.somtummc.Utils.MusicJoin;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
@@ -27,15 +28,19 @@ public class PlayerEvent implements Listener {
     private JDA jda;
     private final SomtumMC plugin;
     private final LuckPerms luckPerms;
+    private final MusicJoin musicJoin;
 
-    public PlayerEvent(JDA jda, SomtumMC plugin, LuckPerms luckPerms) {
+    public PlayerEvent(JDA jda, SomtumMC plugin, LuckPerms luckPerms, MusicJoin musicJoin) {
         this.jda = jda;
         this.plugin = plugin;
         this.luckPerms = luckPerms;
+        this.musicJoin = musicJoin;
     }
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         if (event.getPlayer().hasPlayedBefore()) {
+            Player player = event.getPlayer();
+            musicJoin.playMusic(player);
             CachedMetaData metaData = this.luckPerms.getPlayerAdapter(Player.class).getMetaData(event.getPlayer());
             String prefixWC = metaData.getPrefix();
             String prefix = removeColorCodes(prefixWC);
@@ -51,7 +56,7 @@ public class PlayerEvent implements Listener {
         }
         else {
             Player player = event.getPlayer();
-
+            musicJoin.playMusic(player);
             player.sendMessage(ChatColor.LIGHT_PURPLE + "This is your first time playing!" + ChatColor.GREEN + " Please do /rules before playing! :3");
             TextChannel channel = jda.getTextChannelById("1238520224647745568");
             EmbedBuilder embed = new EmbedBuilder();

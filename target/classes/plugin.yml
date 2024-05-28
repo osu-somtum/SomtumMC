@@ -44,3 +44,10 @@ commands:
       - deletehouse
       - byebyehome
     usage: /<command>
+  togglejoinmusic:
+    description: togglejoinmusic
+    aliases:
+      - tjm
+      - togglemusic
+      - togglejoin
+    usage: /<command>

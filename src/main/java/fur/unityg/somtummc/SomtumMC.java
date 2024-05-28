@@ -3,11 +3,13 @@ package fur.unityg.somtummc;
 import fur.unityg.somtummc.Commands.Gamemode;
 import fur.unityg.somtummc.Commands.RulesCommand;
 import fur.unityg.somtummc.Commands.Sethome;
+import fur.unityg.somtummc.Commands.ToggleJoinMusic;
 import fur.unityg.somtummc.Discord.DiscCommand;
 import fur.unityg.somtummc.Discord.DiscordToMinecraftChat;
 import fur.unityg.somtummc.Discord.PlayerEvent;
 import fur.unityg.somtummc.Utils.LocationUtils;
 
+import fur.unityg.somtummc.Utils.MusicJoin;
 import me.lucko.spark.api.Spark;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.OnlineStatus;
@@ -42,7 +44,6 @@ import java.util.Map;
 
 public final class SomtumMC extends JavaPlugin implements Listener {
     private Map<String, Location> homes = new HashMap<>();
-    String token = "MTIzODUyMzc1NTk0NTUyNTMwOQ.GcELdS.E6k52w1TLclAlPGX32iXrxwNWPsjXueeBAzTwo";
     private ShardManager shardManager;
     public ShardManager getShardManager() {
         return shardManager;
@@ -53,9 +54,14 @@ public final class SomtumMC extends JavaPlugin implements Listener {
         return homes;
     }
     private LuckPerms luckPerms;
+    public static SomtumMC plugin;
+    private MusicJoin musicJoin;
+    private String token;
 
     @Override
     public void onEnable() {
+        plugin = this;
+        musicJoin = new MusicJoin(this);
         homesFile = new File(getDataFolder(), "homes.yml");
         homesConfig = YamlConfiguration.loadConfiguration(homesFile);
         loadHomes();
@@ -63,7 +69,8 @@ public final class SomtumMC extends JavaPlugin implements Listener {
         getLogger().info("Hello World! Somtum Bot is starting up....");
         getLogger().info("I'M ABOUT TO FC BLUEZENITH HD HR 727pp OMG OMG cOMg");
         getLogger().info("============================================");
-
+        FileConfiguration config = getConfig();
+        token = config.getString("bot-token");
         // Registering Spark... and LUCKY PERMISSION
 
         RegisteredServiceProvider<Spark> provider = Bukkit.getServicesManager().getRegistration(Spark.class);
@@ -108,14 +115,17 @@ public final class SomtumMC extends JavaPlugin implements Listener {
         this.getCommand("sethome").setExecutor(new Sethome(this));
         this.getCommand("home").setExecutor(new Sethome(this));
         this.getCommand("delhome").setExecutor(new Sethome(this));
+        getCommand("togglejoinmusic").setExecutor(new ToggleJoinMusic(this));
 
-        PlayerEvent joinMSG = new PlayerEvent(shardManager.getShards().get(0), this, luckPerms);
+        PlayerEvent joinMSG = new PlayerEvent(shardManager.getShards().get(0), this, luckPerms, getMusicJoin());
         getServer().getPluginManager().registerEvents(joinMSG, this);
         shardManager.addEventListener(new DiscCommand());
         shardManager.addEventListener(new DiscordToMinecraftChat(shardManager.getShards().get(0)));
         getServer().getPluginManager().registerEvents(new DiscordToMinecraftChat(shardManager.getShards().get(0)), this);
     }
-
+    public MusicJoin getMusicJoin() {
+        return musicJoin;
+    }
     @Override
     public void onDisable() {
         saveHomes();
