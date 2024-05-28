@@ -28,7 +28,7 @@ public class MusicJoin {
             if (song != null) {
                 rsp.addPlayer(player);
                 rsp.setPlaying(true);
-                player.sendMessage("§aNow playing: §e" + song.getTitle());
+                player.sendMessage("§aNow playing: §e" + song.getPath());
                 songPlayer = rsp; // Store the reference to the song player
             } else {
                 player.sendMessage("§cInvalid NBS File");
@@ -39,7 +39,6 @@ public class MusicJoin {
     public void stopMusic(Player player) {
         if (songPlayer != null) {
             songPlayer.setPlaying(false);
-            player.sendMessage("Music stopped.");
         } else {
             player.sendMessage("No music is currently playing.");
         }

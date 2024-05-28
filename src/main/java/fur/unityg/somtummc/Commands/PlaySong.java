@@ -28,12 +28,12 @@ public class PlaySong implements CommandExecutor, TabCompleter {
         }
 
         Player player = (Player) sender;
-        if (args.length != 1) {
+        if (args.length == 0) {
             player.sendMessage("§cUsage: /playsong <song>");
             return true;
         }
 
-        String songName = args[0];
+        String songName = String.join(" ", args); // Concatenate all arguments into a single string
         musicJoin.playMusic(player, songName);
         return true;
     }

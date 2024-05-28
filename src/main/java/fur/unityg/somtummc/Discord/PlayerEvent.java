@@ -40,7 +40,7 @@ public class PlayerEvent implements Listener {
     public void onPlayerJoin(PlayerJoinEvent event) {
         if (event.getPlayer().hasPlayedBefore()) {
             Player player = event.getPlayer();
-            musicJoin.playMusic(player);
+            musicJoin.playMusic(player, "fnafsong.nbs");
             CachedMetaData metaData = this.luckPerms.getPlayerAdapter(Player.class).getMetaData(event.getPlayer());
             String prefixWC = metaData.getPrefix();
             String prefix = removeColorCodes(prefixWC);
@@ -56,7 +56,7 @@ public class PlayerEvent implements Listener {
         }
         else {
             Player player = event.getPlayer();
-            musicJoin.playMusic(player);
+            musicJoin.playMusic(player, "fnafsong.nbs");
             player.sendMessage(ChatColor.LIGHT_PURPLE + "This is your first time playing!" + ChatColor.GREEN + " Please do /rules before playing! :3");
             TextChannel channel = jda.getTextChannelById("1238520224647745568");
             EmbedBuilder embed = new EmbedBuilder();
@@ -97,7 +97,8 @@ public class PlayerEvent implements Listener {
                 channel.sendMessageEmbeds(embed.build()).queue();
             }
             else {
-                Bukkit.getServer().getLogger().warning("advancement is null - not sending an bedem");
+                return;
+                /* Bukkit.getServer().getLogger().warning("advancement is null - not sending an bedem"); */
             }
         } else {
             Bukkit.getServer().getLogger().warning("Discord channel not found with ID: 1238726409942470749");

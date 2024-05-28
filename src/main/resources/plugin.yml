@@ -58,6 +58,7 @@ commands:
       - stopmusic
       - musicstop
       - ms
+      - endmusic
     usage: /<command>
   playmusic:
     description: play mucic
@@ -67,4 +68,5 @@ commands:
       - playsong
       - ps
       - sp
+      - music
     usage: /<command>
