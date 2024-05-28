@@ -1,9 +1,6 @@
 package fur.unityg.somtummc;
 
-import fur.unityg.somtummc.Commands.Gamemode;
-import fur.unityg.somtummc.Commands.RulesCommand;
-import fur.unityg.somtummc.Commands.Sethome;
-import fur.unityg.somtummc.Commands.ToggleJoinMusic;
+import fur.unityg.somtummc.Commands.*;
 import fur.unityg.somtummc.Discord.DiscCommand;
 import fur.unityg.somtummc.Discord.DiscordToMinecraftChat;
 import fur.unityg.somtummc.Discord.PlayerEvent;
@@ -115,7 +112,9 @@ public final class SomtumMC extends JavaPlugin implements Listener {
         this.getCommand("sethome").setExecutor(new Sethome(this));
         this.getCommand("home").setExecutor(new Sethome(this));
         this.getCommand("delhome").setExecutor(new Sethome(this));
-        getCommand("togglejoinmusic").setExecutor(new ToggleJoinMusic(this));
+        this.getCommand("togglejoinmusic").setExecutor(new ToggleJoinMusic(this));
+        this.getCommand("playmusic").setExecutor(new PlaySong(this, musicJoin));
+        this.getCommand("stopsong").setExecutor(new StopSong(this, musicJoin));
 
         PlayerEvent joinMSG = new PlayerEvent(shardManager.getShards().get(0), this, luckPerms, getMusicJoin());
         getServer().getPluginManager().registerEvents(joinMSG, this);

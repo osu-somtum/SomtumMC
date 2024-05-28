@@ -51,3 +51,20 @@ commands:
       - togglemusic
       - togglejoin
     usage: /<command>
+  stopsong:
+    description: stop mucic
+    aliases:
+      - ihatemusic
+      - stopmusic
+      - musicstop
+      - ms
+    usage: /<command>
+  playmusic:
+    description: play mucic
+    aliases:
+      - pm
+      - songplay
+      - playsong
+      - ps
+      - sp
+    usage: /<command>
