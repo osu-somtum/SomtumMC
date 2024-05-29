@@ -48,7 +48,7 @@ public class MusicJoin {
     public void stopMusic(Player player) {
         if (songPlayer != null) {
             songPlayer.setPlaying(false);
-            // Unregister the song end listener when stopping the song
+
             if (songEndListener != null) {
                 HandlerList.unregisterAll(songEndListener);
             }

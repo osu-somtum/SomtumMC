@@ -40,7 +40,7 @@ public class PlaySong implements CommandExecutor, TabCompleter {
             return true;
         }
 
-        String songName = String.join(" ", args); //efwioujewfoif
+        String songName = String.join(" ", args);
         musicJoin.playMusic(player, songName);
         return true;
     }
