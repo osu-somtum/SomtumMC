@@ -28,12 +28,19 @@ public class PlaySong implements CommandExecutor, TabCompleter {
         }
 
         Player player = (Player) sender;
+
+        // check if music is playing 4 playez
+        if (musicJoin.isPlaying(player)) {
+            player.sendMessage("§cMusic is already playing. If you wish to stop the music. Do /stopmusic!");
+            return true;
+        }
+
         if (args.length == 0) {
             player.sendMessage("§cUsage: /playsong <song>");
             return true;
         }
 
-        String songName = String.join(" ", args); // Concatenate all arguments into a single string
+        String songName = String.join(" ", args); //efwioujewfoif
         musicJoin.playMusic(player, songName);
         return true;
     }

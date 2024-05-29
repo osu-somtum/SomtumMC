@@ -2,21 +2,20 @@ name: SomtumMC
 version: '${project.version}'
 main: fur.unityg.somtummc.SomtumMC
 api-version: '1.20'
-depend: [spark, LuckPerms]
-authors: [UnityG, Phapoom Saksri]
-description: "Can’t stop playing AMONG USSSSSSSSSS,
-                              I love Among USSSSSSSS - Phapoom Saksri... 2024-5-17"
+depend: [spark, LuckPerms, NoteBlockAPI]
+authors: [FurryGang, Phapoom Saksri]
+description: "Fun Fact: I don't know how to code in java."
 website: https://somtum.fun
 commands:
   rules:
-    description: Rules Command.
+    description: It is /rules, Like who read rules smh.
     aliases:
       - rule
-      - rules
-      - imnotshutcre
+      - tos
+      - terms
     usage: /<command>
   gamemode:
-    description: hai :3 its a gamemode cummand
+    description: It is /gamemode
     aliases:
       - gm
       - gammode
@@ -24,35 +23,35 @@ commands:
     usage: /<command> [survival | creative | adventure | spectator]
     permission: somtum.gamemode
   sethome:
-    description: sethome command
+    description: It is /sethome
     aliases:
       - sethouse
       - seth
       - savehome
     usage: /<command>
   home:
-    description: home command
+    description: It is /home
     aliases:
       - house
       - hom
       - mybed
     usage: /<command>
   delhome:
-    description: delhome command
+    description: It is /delhome
     aliases:
       - deletehome
       - deletehouse
       - byebyehome
     usage: /<command>
   togglejoinmusic:
-    description: togglejoinmusic
+    description: It is /togglejoinmusic
     aliases:
       - tjm
       - togglemusic
       - togglejoin
     usage: /<command>
   stopsong:
-    description: stop mucic
+    description: It is /stopsong
     aliases:
       - ihatemusic
       - stopmusic
@@ -61,7 +60,7 @@ commands:
       - endmusic
     usage: /<command>
   playmusic:
-    description: play mucic
+    description: It is /playmusic
     aliases:
       - pm
       - songplay

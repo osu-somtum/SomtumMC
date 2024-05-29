@@ -21,7 +21,7 @@ public class DiscordToMinecraftChat extends ListenerAdapter implements Listener 
             if (event.getMember().getUser().isBot()) {
             } else {
                 String message = event.getMessage().getContentDisplay();
-                Bukkit.getServer().broadcastMessage(ChatColor.AQUA + "Discord" + ChatColor.GRAY + " » " + ChatColor.GOLD + event.getMember().getUser().getName() + ": " + ChatColor.RESET + message);
+                Bukkit.getServer().broadcastMessage(ChatColor.AQUA + "Discord" + ChatColor.GRAY + " » " + ChatColor.GOLD + "[" + event.getMember().getRoles() + "] " + event.getMember().getUser().getName() + ": " + ChatColor.RESET + message);
             }
         }
     }
